@@ -1,4 +1,6 @@
 {
     "name": "Issue 33",
-    "url": "https://eleventy-from-scratch.maltebaer.vercel.app/"
+    "url": "https://eleventy-from-scratch.maltebaer.vercel.app",
+    "authorName": "Issue 33",
+    "authorEmail": "hi@piccalil.li"
 }
