@@ -1,26 +1,41 @@
 {
-  "name": "eleventy-from-scratch",
-  "version": "1.0.0",
-  "description": "",
-  "main": ".eleventy.js",
-  "scripts": {
-    "start": "rm -rf dist && npx eleventy --serve"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/maltebaer/eleventy-from-scratch.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/maltebaer/eleventy-from-scratch/issues"
-  },
-  "homepage": "https://github.com/maltebaer/eleventy-from-scratch#readme",
-  "devDependencies": {
-    "@11ty/eleventy": "^1.0.2",
-    "@11ty/eleventy-fetch": "^3.0.0",
-    "@11ty/eleventy-plugin-rss": "^1.2.0",
-    "moment": "^2.29.4"
-  }
+    "name": "eleventy-from-scratch",
+    "version": "1.0.0",
+    "description": "",
+    "main": ".eleventy.js",
+    "scripts": {
+        "watch:sass": "sass  --no-source-map --watch src/scss:dist/css",
+        "watch:eleventy": "eleventy --serve --incremental",
+        "build:sass-site": "sass  --no-source-map src/scss:dist/css",
+        "build:sass-critcal": "sass  --no-source-map src/scss/critical.scss:src/_includes/css/critical.css",
+        "build:sass": "npm-run-all --parallel build:sass-site build:sass-critcal",
+        "build:eleventy": "eleventy",
+        "postbuild": "postcss dist/css/*.css -u autoprefixer cssnano -r --no-map",
+        "start": "cross-env ELEVENTY_ENV=dev npm-run-all build:sass --parallel watch:*",
+        "build": "cross-env ELEVENTY_ENV=prod npm-run-all build:sass build:eleventy"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/maltebaer/eleventy-from-scratch.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/maltebaer/eleventy-from-scratch/issues"
+    },
+    "homepage": "https://github.com/maltebaer/eleventy-from-scratch#readme",
+    "devDependencies": {
+        "@11ty/eleventy": "^1.0.0",
+        "@11ty/eleventy-fetch": "^3.0.0",
+        "@11ty/eleventy-plugin-rss": "^1.2.0",
+        "autoprefixer": "^10.4.2",
+        "cross-env": "^7.0.3",
+        "cssnano": "^5.0.15",
+        "moment": "^2.29.4",
+        "npm-run-all": "^4.1.5",
+        "postcss": "^8.4.5",
+        "postcss-cli": "^9.1.0",
+        "sass": "^1.58.3"
+    }
 }
