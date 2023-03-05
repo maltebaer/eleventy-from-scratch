@@ -7,7 +7,7 @@
         "watch:sass": "sass  --no-source-map --watch src/scss:dist/css",
         "watch:eleventy": "eleventy --serve --incremental",
         "build:sass-site": "sass  --no-source-map src/scss:dist/css",
-        "build:sass-critcal": "sass  --no-source-map src/scss/critical.scss:src/_includes/css/critical.css",
+        "build:sass-critcal": "sass  --no-source-map src/scss/critical.scss:src/_includes/css/critical.css src/scss/home.scss:src/_includes/css/home.css",
         "build:sass": "npm-run-all --parallel build:sass-site build:sass-critcal",
         "build:eleventy": "eleventy",
         "postbuild": "postcss dist/css/*.css -u autoprefixer cssnano -r --no-map",
