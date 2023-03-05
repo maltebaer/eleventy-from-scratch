@@ -4,11 +4,22 @@ const rssPlugin = require('@11ty/eleventy-plugin-rss');
 const dateFilter = require('./src/filters/date-filter.js');
 const w3DateFilter = require('./src/filters/w3-date-filter.js');
 
+// Transforms
+const htmlMinTransform = require('./src/transforms/html-min-transform.js');
+
+// Create a helpful production flag
+const isProduction = process.env.NODE_ENV === 'production';
+
 require('./src/utils/sort-by-display-order.js');
 
 module.exports = config => {
     // Plugins
     config.addPlugin(rssPlugin);
+
+    // Only minify HTML if we are in production because it slows builds _right_ down
+    if (isProduction) {
+        config.addTransform('htmlmin', htmlMinTransform);
+    }
 
     // Add filters
     config.addFilter('dateFilter', dateFilter);
@@ -40,9 +51,6 @@ module.exports = config => {
             return Number(a.fileSlug) > Number(b.fileSlug) ? 1 : -1;
         });
     });
-
-    // Set directories to pass through to the dist folder
-    config.addPassthroughCopy('./src/images/');
 
     // Tell 11ty to use the .eleventyignore and ignore our .gitignore file
     config.setUseGitIgnore(false);
